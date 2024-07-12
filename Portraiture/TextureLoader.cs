@@ -147,59 +147,59 @@ namespace Portraiture
 
         private static void loadAllPortraits()
         {
-            foreach (string dir in Directory.EnumerateDirectories(contentFolder))
-            {
-                string folderName = new DirectoryInfo(dir).Name;
+            //foreach (string dir in Directory.EnumerateDirectories(contentFolder))
+            //{
+            //    string folderName = new DirectoryInfo(dir).Name;
 
-                folders.Add(folderName);
-                foreach (string file in Directory.EnumerateFiles(dir, "*.*", SearchOption.TopDirectoryOnly).Where(s => s.EndsWith(".png") || s.EndsWith(".xnb")))
-                {
-                    string fileName = Path.GetFileName(file);
-                    string name = Path.GetFileNameWithoutExtension(file).Split(new[] { "_anim_" }, StringSplitOptions.RemoveEmptyEntries)[0];
-                    string extention = Path.GetExtension(file).ToLower();
+            //    folders.Add(folderName);
+            //    foreach (string file in Directory.EnumerateFiles(dir, "*.*", SearchOption.TopDirectoryOnly).Where(s => s.EndsWith(".png") || s.EndsWith(".xnb")))
+            //    {
+            //        string fileName = Path.GetFileName(file);
+            //        string name = Path.GetFileNameWithoutExtension(file).Split(new[] { "_anim_" }, StringSplitOptions.RemoveEmptyEntries)[0];
+            //        string extention = Path.GetExtension(file).ToLower();
 
-                    if (extention == "xnb")
-                        fileName = name;
+            //        if (extention == "xnb")
+            //            fileName = name;
 
-                    Texture2D texture = PortraitureMod.helper.ModContent.Load<Texture2D>($"Portraits/{folderName}/{fileName}");
+            //        Texture2D texture = PortraitureMod.helper.ModContent.Load<Texture2D>($"Portraits/{folderName}/{fileName}");
 
-                    Texture2D frame = texture;
-                    int fps = 12;
-                    int frames = 1;
-                    bool loop = false;
-                    if (fileName.Contains("_anim_"))
-                    {
-                        string[] fdata = fileName.Split(new[] { "_anim_" }, StringSplitOptions.RemoveEmptyEntries);
-                        if (fdata.Length > 1)
-                            frames = int.Parse(fdata[1]);
+            //        Texture2D frame = texture;
+            //        int fps = 12;
+            //        int frames = 1;
+            //        bool loop = false;
+            //        if (fileName.Contains("_anim_"))
+            //        {
+            //            string[] fdata = fileName.Split(new[] { "_anim_" }, StringSplitOptions.RemoveEmptyEntries);
+            //            if (fdata.Length > 1)
+            //                frames = int.Parse(fdata[1]);
 
-                        if (fdata.Length > 2)
-                            fps = int.Parse(fdata[2]);
+            //            if (fdata.Length > 2)
+            //                fps = int.Parse(fdata[2]);
 
-                        if (fdata.Length > 3)
-                            loop = fdata[3] == "loop";
+            //            if (fdata.Length > 3)
+            //                loop = fdata[3] == "loop";
 
-                        if (frames < 1)
-                            frames = 1;
+            //            if (frames < 1)
+            //                frames = 1;
 
-                        if (fps < 1)
-                            fps = 12;
-                    }
+            //            if (fps < 1)
+            //                fps = 12;
+            //        }
 
-                    double tileWith = Convert.ToDouble(Math.Max(texture.Width / 2, 64)) / frames;
-                    float scale = (float)(tileWith / 64);
-                    Texture2D scaled = texture;
-                    if (frames == 1)
-                        scaled = new ScaledTexture2D(texture, scale);
-                    else if (frames > 1)
-                        scaled = new AnimatedTexture2D(texture, texture.Width / frames, texture.Height, fps, loop, scale);
+            //        double tileWith = Convert.ToDouble(Math.Max(texture.Width / 2, 64)) / frames;
+            //        float scale = (float)(tileWith / 64);
+            //        Texture2D scaled = texture;
+            //        if (frames == 1)
+            //            scaled = new ScaledTexture2D(texture, scale);
+            //        else if (frames > 1)
+            //            scaled = new AnimatedTexture2D(texture, texture.Width / frames, texture.Height, fps, loop, scale);
 
-                    if (!pTextures.ContainsKey(folderName + ">" + name))
-                        pTextures.Add(folderName + ">" + name, scaled);
-                    else
-                        pTextures[folderName + ">" + name] = scaled;
-                }
-            }
+            //        if (!pTextures.ContainsKey(folderName + ">" + name))
+            //            pTextures.Add(folderName + ">" + name, scaled);
+            //        else
+            //            pTextures[folderName + ">" + name] = scaled;
+            //    }
+            //}
 
             var contentPacks = PortraitureMod.helper.ContentPacks.GetOwned();
 
