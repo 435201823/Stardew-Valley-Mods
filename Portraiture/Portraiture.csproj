@@ -6,10 +6,6 @@
     <Version>1.12.1-alpha.20240304</Version>
     <Configurations>Debug;Release;Android;PreAlphaRelease;PreAlphaDebug;Prealpharelease</Configurations>
   </PropertyGroup>
-  
-  <ItemGroup>
-    <Content Include="Portraits\Non-Content-Pack-Folders-Go-Here.txt" CopyToOutputDirectory="Always" />
-  </ItemGroup>
 
   <ItemGroup>
     <Reference Include="BmFont" HintPath="$(GamePath)\BmFont.dll" Private="False" />

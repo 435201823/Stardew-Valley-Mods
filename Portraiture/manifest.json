@@ -1,11 +1,11 @@
 {
-  "Name": "Portraiture",
-  "Author": "Platonymous",
+  "Name": "PortraiturePlus",
+  "Author": "Smallfire",
   "Version": "1.12.1-alpha.20240304",
-  "Description": "Helper Mod for Portraits.",
-  "UniqueID": "Platonymous.Portraiture",
+  "Description": "This is a secondary development of the Portrait mod, introducing version control support for more organized update management.这是 Portrait mod 的二次开发，引入了版本控制支持，以实现更有条理的更新管理。",
+  "UniqueID": "Smallfire.PortraiturePlus",
   "EntryDll": "Portraiture.dll",
   "MinimumApiVersion": "3.14.0",
-  "UpdateKeys": [ "Nexus:999" ],
+  "UpdateKeys": [ "Nexus:???" ],
   "Dependencies": []
 }
