@@ -210,25 +210,30 @@ namespace Portraiture
                 folders.Add(folderName);
                 foreach (string file in Directory.EnumerateFiles(pack.DirectoryPath, "*.*", SearchOption.AllDirectories).Where(s => s.EndsWith(".png") || s.EndsWith(".xnb")))
                 {
-                    string fileName = Path.GetFileName(file);
-                    string name = Path.GetFileNameWithoutExtension(file);
+                    string relativePath = Path.GetRelativePath(PortraitureMod.helper.DirectoryPath, file);
                     string extention = Path.GetExtension(file).ToLower();
+                    string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(file);
+                    string dirName = Path.GetDirectoryName(relativePath);
+
+                    //string fileName = Path.GetFileName(file);
+                    //string name = Path.GetFileNameWithoutExtension(file);
+                    //string extention = Path.GetExtension(file).ToLower();
 
                     if (extention == "xnb")
-                        fileName = name;
-                    Texture2D texture = pack.ModContent.Load<Texture2D>(fileName);
+                        relativePath = dirName + fileNameWithoutExtension;
+                    Texture2D texture = pack.ModContent.Load<Texture2D>(relativePath);
                     int tileWith = Math.Max(texture.Width / 2, 64);
                     float scale = tileWith / 64;
 
 
                     ScaledTexture2D scaled;
                     
-                        scaled = ScaledTexture2D.FromTexture(Game1.getCharacterFromName(name).Portrait, texture, scale);
-                   
-                    if (!pTextures.ContainsKey(folderName + ">" + name))
-                        pTextures.Add(folderName + ">" + name, scaled);
+                        scaled = new ScaledTexture2D(texture, scale);
+
+                    if (!pTextures.ContainsKey(folderName + ">" + fileNameWithoutExtension))
+                        pTextures.Add(folderName + ">" + fileNameWithoutExtension, scaled);
                     else
-                        pTextures[folderName + ">" + name] = scaled;
+                        pTextures[folderName + ">" + fileNameWithoutExtension] = scaled;
                 }
             }
             
